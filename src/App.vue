@@ -1,14 +1,24 @@
 <template>
     <div id="app">
-        <nav>
-            <router-link to="/">Home</router-link> |
-            <router-link to="/about">About</router-link>
-        </nav>
         <router-view />
+        <div class="box"></div>
+        <TopBar></TopBar>
     </div>
 </template>
 
-<style lang="less">
+<script>
+import TopBar from "@/components/TopBar.vue";
+export default {
+    data() {
+        return {};
+    },
+    components: {
+        TopBar,
+    },
+};
+</script>
+
+<style lang="less" scoped>
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
