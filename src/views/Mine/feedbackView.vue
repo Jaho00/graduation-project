@@ -3,14 +3,24 @@
         <!-- 导航栏 -->
         <van-nav-bar title="意见反馈" left-text="返回" left-arrow @click-left="onClickLeft" />
         <!-- 留言 -->
-        <van-field v-model="message" rows="2" autosize label="留言" type="textarea" maxlength="500" placeholder="请输入留言" show-word-limit />
+        <van-field v-model="message" rows="6" autosize label="留言" type="textarea" maxlength="500" placeholder="请输入留言" show-word-limit />
+
+        <div class="btn-container">
+            <a href="#" class="btn-3d blue">提交</a>
+        </div>
     </div>
 </template>
 
 <script>
+import "@/assets/css/feedbackButton.css";
 export default {
     data() {
         return {};
+    },
+    methods: {
+        onClickLeft() {
+            this.$router.push("/mine");
+        },
     },
 };
 </script>

@@ -10,6 +10,11 @@ export default {
     data() {
         return {};
     },
+    methods: {
+        onClickLeft() {
+            this.$router.push("/mine");
+        },
+    },
 };
 </script>
 
