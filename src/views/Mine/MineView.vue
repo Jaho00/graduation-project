@@ -1,5 +1,6 @@
 <template>
     <div class="mine">
+        <router-view></router-view>
         <div class="login-box">
             <div class="head-portrait" @click="shadeOpenClick">
                 <img src="../../assets/img/unhead.png" alt="" />
@@ -11,10 +12,10 @@
         </div>
         <!-- 四宫格 -->
         <van-grid :gutter="50" column-num="2" class="grid">
-            <van-grid-item icon="orders-o" text="我的订单" class="grid" to="/order" />
-            <van-grid-item icon="location-o" text="地址管理" class="grid" to="/address" />
-            <van-grid-item icon="star-o" text="我的收藏" class="grid" to="/collect" />
-            <van-grid-item icon="records" text="意见反馈" class="grid" to="/feedback" />
+            <van-grid-item icon="orders-o" text="我的订单" class="grid" to="/mine/order" />
+            <van-grid-item icon="location-o" text="地址管理" class="grid" to="/mine/address" />
+            <van-grid-item icon="star-o" text="我的收藏" class="grid" to="/mine/collect" />
+            <van-grid-item icon="records" text="意见反馈" class="grid" to="/mine/feedback" />
         </van-grid>
         <!-- 遮罩 -->
         <van-overlay :show="show" @click="show = false">
