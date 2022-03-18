@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="address">
         <!-- 导航栏 -->
         <van-nav-bar title="地址管理" left-text="返回" left-arrow @click-left="onClickLeft" />
         <!-- 地址管理 -->
@@ -52,4 +52,14 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.address {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    z-index: 999;
+}
+</style>

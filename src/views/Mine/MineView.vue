@@ -1,7 +1,7 @@
 <template>
     <div class="mine">
-        <router-view></router-view>
         <div class="login-box">
+            <router-view></router-view>
             <div class="head-portrait" @click="shadeOpenClick">
                 <img src="../../assets/img/unhead.png" alt="" />
             </div>

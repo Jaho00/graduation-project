@@ -25,22 +25,22 @@ const routes = [
         component: () => import(/* webpackChunkName: "mine" */ "../views/Mine/MineView.vue"),
         children: [
             {
-                path: "/collect",
+                path: "collect",
                 name: "collect",
                 component: () => import(/* webpackChunkName: "collect" */ "../views/Mine/collectView.vue"),
             },
             {
-                path: "/feedback",
+                path: "feedback",
                 name: "feedback",
                 component: () => import(/* webpackChunkName: "feedback" */ "../views/Mine/feedbackView.vue"),
             },
             {
-                path: "/order",
+                path: "order",
                 name: "order",
                 component: () => import(/* webpackChunkName: "order" */ "../views/Mine/orderFormView.vue"),
             },
             {
-                path: "/address",
+                path: "address",
                 name: "address",
                 component: () => import(/* webpackChunkName: "address" */ "../views/Mine/addressManagementView.vue"),
             },
