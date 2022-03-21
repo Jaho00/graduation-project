@@ -9,6 +9,8 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "express": "^4.17.3",
+    "express-jwt": "^6.1.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "reset-css": "^5.0.1",
     "vant": "^2.12.44",
