@@ -4,6 +4,7 @@ var sqlMap = {
     user: {
         // search:"select * from userinfo",
         search: "select * from userinfo where username=?", //查询表中是否有
+        search_id: "select * from userinfo where id=?", //查询表中是否有
         add: "insert into userinfo(username,password,userphone,token) values (?,?,?,?)", //向数据库的某个表插入数据
         upheadPortrait: "UPDATE userinfo SET imgsrc = ? WHERE id = ?",
     },

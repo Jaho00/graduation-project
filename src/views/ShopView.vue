@@ -52,7 +52,7 @@ export default {
                 // checkAll的值就是true,  checkList的值就应该都为true
                 // checkAll的值就是false,  checkList的值就应该都为false
                 // checkList里面的每一个元素都应该被修改成 newVal
-                this.checkList = this.checkList.map((item) => newVal);
+                this.checkList = this.checkList.map(item => newVal);
             },
         },
     },

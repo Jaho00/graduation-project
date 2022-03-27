@@ -1,10 +1,38 @@
 var express = require("express"); // express框架
 var router = express.Router();
 var $sql = require("./sqlmap"); // sql语句
-var conn = require("./connect");
 var mysql = require("mysql");
+var models = require("./db"); // 引入db配置
+
 var jsonWrite = require("./jsonWrite");
 var jsonWebToken = require("jsonwebtoken"); // 引入 jsonwebtoken
+
+var conn;
+//******，下面这段代码主要是为了解决数据一段时间不操作之后出现 reade ECONNRESET 错误，在网上百度了一下这个错，又说是node版本不对，要回退版本，没有这样操作
+function handleError() {
+    //创建一个mysql连接对象
+    conn = mysql.createConnection(models.mysql);
+
+    //连接错误，2秒重试
+    conn.connect(function (err) {
+        if (err) {
+            console.log("error when connecting to db:", err);
+            setTimeout(handleError, 2000);
+        }
+    });
+    //监听错误
+    conn.on("error", function (err) {
+        console.log("db error", err);
+        // 如果是连接断开，自动重新连接
+        if (err.code === "PROTOCOL_CONNECTION_LOST") {
+            handleError();
+        } else {
+            throw err;
+        }
+    });
+    console.log("连接成功");
+}
+handleError();
 
 const SECRET_KEY = "JahoCaffee";
 
@@ -23,6 +51,20 @@ router.get("/userinfo", function (req, res) {
     let sql = $sql.user.search;
     let params = req.query;
     conn.query(sql, [params.username], function (err, result) {
+        if (err) {
+            res.json({ msg: "查询失败", code: 0 });
+        }
+        if (result) {
+            res.json({ msg: "查询成功", code: 200, data: result });
+        }
+    });
+});
+
+// 登录/查询用户的信息
+router.get("/userinfo/id", function (req, res) {
+    let sql = $sql.user.search_id;
+    let params = req.query;
+    conn.query(sql, [params.id], function (err, result) {
         if (err) {
             res.json({ msg: "查询失败", code: 0 });
         }
@@ -65,7 +107,21 @@ router.post("/adduser", (req, res) => {
 router.post("/user/upheadPortrait", (req, res) => {
     var sql = $sql.user.upheadPortrait;
     var parms = req.body;
-    conn.query(sql, [parms.imgsrc, parms.id], function (err, result) {
+    if (req.method == "POST") {
+        var data = [];
+        req.on("data", chunk => {
+            data.push(chunk);
+        });
+        req.on("end", () => {
+            var buffer = Buffer.concat(data);
+            fs.writeFile("./a", buffer, err => {
+                if (!err) {
+                    res.end("ok");
+                }
+            });
+        });
+    }
+    conn.query(sql, [imgsrc, parms.id], function (err, result) {
         if (err) {
             res.json({ msg: "头像更改失败", code: 0 });
         }

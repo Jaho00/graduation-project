@@ -15,7 +15,9 @@
 import "@/assets/css/feedbackButton.css";
 export default {
     data() {
-        return {};
+        return {
+            message: "",
+        };
     },
     methods: {
         onClickLeft() {
