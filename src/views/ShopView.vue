@@ -4,23 +4,10 @@
         <!-- 滚动通知 -->
         <van-notice-bar left-icon="volume-o" text="乔治队长 哥伦比亚手冲拼配咖啡豆草莓蜜桃双重厌氧冷泡150g包邮 限时8折优惠" class="inform" />
         <!-- 商品 -->
-        <van-checkbox-group v-model="checkList" ref="checkboxGroup">
-            <van-swipe-cell class="shop-products">
-                <van-checkbox name="a" class="checkbox"><ShopProducts></ShopProducts></van-checkbox>
-                <template #right>
-                    <van-button square text="删除" type="danger" class="delete-button" />
-                </template>
-            </van-swipe-cell>
-            <van-swipe-cell class="shop-products">
-                <van-checkbox name="b" class="checkbox"><ShopProducts></ShopProducts></van-checkbox>
-                <template #right>
-                    <van-button square text="删除" type="danger" class="delete-button" />
-                </template>
-            </van-swipe-cell>
-        </van-checkbox-group>
 
+        <ShopProducts></ShopProducts>
         <!-- 提交订单 -->
-        <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit" class="submit-your-order">
+        <van-submit-bar :price="0" button-text="提交订单" @submit="onSubmit" class="submit-your-order">
             <van-checkbox v-model="checkAll">全选</van-checkbox>
         </van-submit-bar>
     </div>
@@ -31,10 +18,7 @@ import ShopProducts from "@/components/ShopProducts.vue";
 export default {
     data() {
         return {
-            checked: false,
             Url: require("../assets/img/ROMANTIC-STRAWBERRY-150G.jpg"),
-            checkList: [],
-            checkAll_num: 1,
         };
     },
     computed: {
@@ -81,17 +65,9 @@ export default {
         font-weight: 520;
         font-family: Tahoma, Helvetica, Arial;
     }
-    .checkbox {
-        background-color: #fff;
-    }
+
     .inform {
         margin-bottom: 8px;
-    }
-    .delete-button {
-        height: 114px;
-    }
-    .shop-products {
-        margin-bottom: 10px;
     }
 }
 </style>

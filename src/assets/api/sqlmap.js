@@ -42,7 +42,9 @@ var sqlMap = {
     // 购物车
     shoppingCart: {
         search: "SELECT * FROM productinfo p RIGHT JOIN `shopping-cart` s on p.id=s.productid WHERE userid = ? ORDER BY time", // 查询购物车信息
+        p_search: "SELECT * FROM productinfo p RIGHT JOIN `shopping-cart` s on p.id=s.productid WHERE userid = ? and productid = ?", // 查询购物车信息
         add: "insert into `shopping-cart`(userid,productid,num) values (?,?,?)", //购物车添加商品
+        upshopcart: "UPDATE `shopping-cart` SET num = ? WHERE productid = ? and userid = ?", //修改userinfo中的地址
         delete: "DELETE FROM `shopping-cart` WHERE userid=?,productid=?", //删除购物车中的商品
     },
 };

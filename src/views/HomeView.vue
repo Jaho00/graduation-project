@@ -19,6 +19,7 @@ export default {
             value: "",
         };
     },
+
     components: {
         HomeSwiper,
         HomeProducts,
@@ -34,7 +35,7 @@ export default {
     width: 100%;
     background-image: linear-gradient(0deg, #c4e2ff, #dbecfd, #eff7ff, #ffffff);
     .box {
-        height: 50px;
+        height: 60px;
     }
     .b {
         color: #978b8d;

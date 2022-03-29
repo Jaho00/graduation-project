@@ -12,3 +12,12 @@ export const uploadHeadImgAPI = params => instance.post("/user/upheadPortrait", 
 
 // 用户注册
 export const userRegistrationAPI = params => instance.post("/Mine/adduser", qs.stringify(params));
+
+// 获取用户购物车的数据
+export const getShopCartAPI = params => instance.get("/ShoppingCart/search", { params });
+
+// 获取商品列表
+export const getProductInfoAPI = () => instance.get("/Product/search");
+
+// 发送留言请求
+export const submitMessageAPI = params => instance.post("/Mine/feedback", qs.stringify(params));

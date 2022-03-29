@@ -2,13 +2,7 @@
     <div class="homeSwiper">
         <div class="box">
             <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-                <van-swipe-item><img src="../assets/img/Ethiopian-grapefruit-black-tea.jpg" alt="" /></van-swipe-item>
-                <van-swipe-item><img src="../assets/img/Hazelnut-white-coincidence.jpg" alt="" /></van-swipe-item>
-                <van-swipe-item><img src="../assets/img/Jackfruit-anaerobic-sun-exposure.jpg" alt="" /></van-swipe-item>
-                <van-swipe-item><img src="../assets/img/Raspberry-fruit-stuffing.jpg" alt="" /></van-swipe-item>
-                <van-swipe-item><img src="../assets/img/Rwandan-raisins-are-sunburned.jpg" alt="" /></van-swipe-item>
-                <van-swipe-item><img src="../assets/img/Super-sunbathing-in-Colombia.jpg" alt="" /></van-swipe-item>
-                <van-swipe-item><img src="../assets/img/Yunnan-apricot-cocoa.jpg" alt="" /></van-swipe-item>
+                <van-swipe-item v-for="(item, index) in img_src" :key="index"><img :src="item" alt="" /></van-swipe-item>
             </van-swipe>
         </div>
     </div>
@@ -17,7 +11,17 @@
 <script>
 export default {
     data() {
-        return {};
+        return {
+            img_src: [
+                "https://s2.loli.net/2022/03/16/Sa2ulxeDiWYMwmy.jpg",
+                "https://s2.loli.net/2022/03/16/6FbyxlpYP5B7IkQ.jpg",
+                "https://s2.loli.net/2022/03/16/y2nDqKaVMfz7XAG.jpg",
+                "https://s2.loli.net/2022/03/16/7eGWqMShHzgE6Pu.jpg",
+                "https://s2.loli.net/2022/03/16/mx1Z4qD5V6wSjCo.jpg",
+                "https://s2.loli.net/2022/03/16/ax3f1lImQ8ZRibz.jpg",
+                "https://s2.loli.net/2022/03/16/iV6BcRHUDKsSxZd.jpg",
+            ],
+        };
     },
 };
 </script>

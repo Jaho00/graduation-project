@@ -1,36 +1,79 @@
 <template>
-  <div class="shop-products">
-    <van-card num="2" price="85.00" desc="150g新鲜烘焙" title="乔治队长 哥斯达黎加音乐家莫扎特精品手冲咖啡豆" thumb="https://s2.loli.net/2022/03/16/37atN89CEoiqQfK.png" class="product"> </van-card>
-  </div>
+    <div>
+        <van-checkbox-group v-model="checkList" ref="checkboxGroup">
+            <van-swipe-cell class="shop-products" v-for="item in productInfo" :key="item.id">
+                <van-checkbox :name="item.productid" class="checkbox">
+                    <van-card :num="item.num" :price="item.price" :desc="item.describe" :title="item.name" :thumb="item.imgsrc" class="product">
+                    </van-card>
+                </van-checkbox>
+                <template #right>
+                    <van-button square text="删除" type="danger" class="delete-button" />
+                </template>
+            </van-swipe-cell>
+        </van-checkbox-group>
+    </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
-  data() {
-    return {};
-  },
+    data() {
+        return {
+            productInfo: [],
+
+            checked: false,
+            checkList: [],
+            checkAll_num: 1,
+            reProductInfo: [],
+        };
+    },
+    async created() {
+        await this.asyncgetShopCartProduct();
+        this.productInfo = this.productinfo;
+        console.log(this.reProductInfo.includes(3));
+    },
+    computed: {
+        ...mapState({
+            productinfo: state => state.shopcartproduct.productinfo,
+        }),
+    },
+    methods: {
+        ...mapActions({
+            asyncgetShopCartProduct: "shopcartproduct/asyncgetShopCartProduct",
+        }),
+    },
 };
 </script>
 
 <style lang="less" scoped>
 .van-card__num {
-  border: 1px solid #978b8d;
-  border-radius: 10px;
-  padding: 1px 8px;
-  margin-right: 10px;
+    border: 1px solid #978b8d;
+    border-radius: 10px;
+    padding: 1px 8px;
+    margin-right: 10px;
 }
 .van-card__price {
-  color: #fb5103;
-  font-weight: bold;
+    color: #fb5103;
+    font-weight: bold;
 }
 .product {
-  background-color: #fff;
+    background-color: #fff;
 }
 .van-card__title {
-  width: 215px;
-  display: block;
-  overflow: hidden; //超出一行文字自动隐藏
-  text-overflow: ellipsis; //文字隐藏后添加省略号
-  white-space: nowrap; //强制不换行
+    width: 215px;
+    display: block;
+    overflow: hidden; //超出一行文字自动隐藏
+    text-overflow: ellipsis; //文字隐藏后添加省略号
+    white-space: nowrap; //强制不换行
+}
+.checkbox {
+    background-color: #fff;
+    padding-left: 20px;
+}
+.delete-button {
+    height: 114px;
+}
+.shop-products {
+    margin-bottom: 10px;
 }
 </style>

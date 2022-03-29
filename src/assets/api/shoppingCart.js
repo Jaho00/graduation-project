@@ -50,10 +50,62 @@ router.get("/search", function (req, res) {
 // 购物车添加商品
 router.post("/add", (req, res) => {
     var sql = $sql.shoppingCart.add;
+    var sql1 = $sql.shoppingCart.p_search;
+    var sql2 = $sql.shoppingCart.upshopcart;
     var parms = req.body;
-    conn.query(sql, [parms.userid, parms.productid, parms.num], function (err, result) {
+
+    var s_res = [];
+
+    // 获取购物车信息判断添加的商品有无已添加过
+    var p = new Promise((resolve, reject) => {
+        conn.query(sql1, [parms.userid, parms.productid], function (err, result) {
+            if (err) {
+                res.json({ msg: "查询失败", code: 0 });
+            }
+            if (result) {
+                // console.log(, result.length);
+                s_res = result.length;
+                resolve(result);
+                console.log(1111111111);
+            }
+        });
+    }).then(res1 => {
+        if (res1.length == 0) {
+            // 添加购物车中没有的商品
+            console.log(222222);
+            conn.query(sql, [parms.userid, parms.productid, parms.num], function (err, result) {
+                if (err) {
+                    res.json({ msg: "商品添加失败", code: 0 });
+                }
+                if (result) {
+                    jsonWrite(res, result);
+                }
+            });
+        } else if (res1.length == 1) {
+            // 修改购物车中重复商品的数量
+            let sum_num = +res1[0].num + +parms.num;
+            console.log(3333333);
+            conn.query(sql2, [sum_num, parms.productid, parms.userid], function (err, result) {
+                if (err) {
+                    res.json({ msg: "商品添加失败", code: 0 });
+                }
+                if (result) {
+                    jsonWrite(res, result);
+                }
+            });
+        }
+    });
+
+    /*  */
+});
+
+// 修改商品数量
+router.post("/update", (req, res) => {
+    var sql = $sql.shoppingCart.upshopcart;
+    var parms = req.body;
+    conn.query(sql, [parms.num, parms.productid, parms.userid], function (err, result) {
         if (err) {
-            res.json({ msg: "商品添加失败", code: 0 });
+            res.json({ msg: "商品修改失败", code: 0 });
         }
         if (result) {
             jsonWrite(res, result);

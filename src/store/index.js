@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import commodity from "./commodity";
+import shopcartproduct from "./shopcartproduct";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    modules: { commodity },
+    modules: { shopcartproduct },
 });

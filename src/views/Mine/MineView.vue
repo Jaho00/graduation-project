@@ -112,7 +112,7 @@ export default {
             // 登录界面的显示与隐藏
             isShowlogin: false,
             // 登录框和注册框的显示与隐藏
-            isShowModal: false,
+            isShowModal: true,
             userInfo: [],
             // key值
             refresh: 0,
@@ -150,12 +150,6 @@ export default {
             // 验证用户名是否为空
             if (this.username == "") {
                 Notify({ type: "warning", message: "账号不能为空!" });
-                return;
-            }
-
-            // 限制账号必须字母开头，只允许长度5-16，字母数字下划线!
-            if (!validateUserName(this.username)) {
-                Notify({ type: "warning", message: "账号必须字母开头，只允许长度5-8，字母数字下划线!" });
                 return;
             }
 

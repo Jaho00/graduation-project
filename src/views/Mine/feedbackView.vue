@@ -5,13 +5,18 @@
         <!-- 留言 -->
         <van-field v-model="message" rows="6" autosize label="留言" type="textarea" maxlength="500" placeholder="请输入留言" show-word-limit />
 
-        <div class="btn-container">
+        <div class="btn-container" @click="submitMessage">
             <a href="#" class="btn-3d blue">提交</a>
         </div>
     </div>
 </template>
 
 <script>
+// 轻提示
+import { Toast } from "vant";
+// 通知提示
+import { Notify } from "vant";
+import { submitMessageAPI } from "@/request/api";
 import "@/assets/css/feedbackButton.css";
 export default {
     data() {
@@ -20,8 +25,28 @@ export default {
         };
     },
     methods: {
+        // 返回按钮的跳转
         onClickLeft() {
             this.$router.push("/mine");
+        },
+        async submitMessage() {
+            let userid = localStorage.getItem("id");
+            let opinion = this.message;
+
+            if (opinion == "") {
+                Notify({ type: "warning", message: "请输入留言!" });
+                return;
+            }
+            let res = await submitMessageAPI({
+                userid,
+                opinion,
+            });
+            if (res.code == 200) {
+                Toast.success("留言成功");
+                this.message = "";
+            } else {
+                Toast.fail("留言失败");
+            }
         },
     },
 };
