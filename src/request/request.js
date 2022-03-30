@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Notify } from "vant";
 
 // 创建axios实例(instance)
 const instance = axios.create({
@@ -32,7 +33,7 @@ instance.interceptors.response.use(
         return res_data;
     },
     err => {
-        Notify({ type: "danger", message: "通知内容" });
+        Notify({ type: "danger", message: "响应错误" });
         return Promise.reject(err);
     }
 );

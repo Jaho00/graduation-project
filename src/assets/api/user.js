@@ -149,6 +149,8 @@ router.post("/addAddress", (req, res) => {
 router.post("/feedback", (req, res) => {
     var sql = $sql.feedback.upfeedback;
     var parms = req.body;
+    // let opinion = parms.opinion.toString();
+    // console.log(opinion);
     conn.query(sql, [parms.opinion, parms.id], function (err, result) {
         if (err) {
             res.json({ msg: "留言失败", code: 0 });
@@ -189,7 +191,7 @@ router.post("/orderform/add", (req, res) => {
 
 // 查询收藏夹信息
 router.get("/favorites/search", function (req, res) {
-    let sql = $sql.orderform.search;
+    let sql = $sql.favorites.search;
     let params = req.query;
     conn.query(sql, [params.userid], function (err, result) {
         if (err) {
@@ -220,8 +222,10 @@ router.post("/favorites/del", (req, res) => {
     var sql = $sql.favorites.delete;
     var parms = req.body;
     conn.query(sql, [parms.userid, parms.productid], function (err, result) {
+        console.log(parms.productid);
         if (err) {
             res.json({ msg: "取消收藏失败", code: 0 });
+            console.log(err);
         }
         if (result) {
             jsonWrite(res, result);

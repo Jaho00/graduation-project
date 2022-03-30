@@ -30,7 +30,7 @@ export default {
             this.$router.push("/mine");
         },
         async submitMessage() {
-            let userid = localStorage.getItem("id");
+            let id = localStorage.getItem("id");
             let opinion = this.message;
 
             if (opinion == "") {
@@ -38,7 +38,7 @@ export default {
                 return;
             }
             let res = await submitMessageAPI({
-                userid,
+                id,
                 opinion,
             });
             if (res.code == 200) {
@@ -55,7 +55,6 @@ export default {
 <style lang="less" scoped>
 .feedback {
     width: 100%;
-    height: 100vh;
     position: fixed;
     left: 0;
     top: 0;

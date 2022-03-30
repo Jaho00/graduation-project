@@ -21,3 +21,12 @@ export const getProductInfoAPI = () => instance.get("/Product/search");
 
 // 发送留言请求
 export const submitMessageAPI = params => instance.post("/Mine/feedback", qs.stringify(params));
+
+// 获取用户订单列表
+export const getOrderFormAPI = params => instance.get("/Mine/orderform/search", { params });
+
+// 获取用户收藏夹列表
+export const getFavoritesAPI = params => instance.get("/Mine/favorites/search", { params });
+
+// 发起取消收藏请求
+export const unSellAPI = params => instance.post("/Mine/favorites/del", qs.stringify(params));

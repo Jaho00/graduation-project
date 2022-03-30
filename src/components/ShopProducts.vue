@@ -3,7 +3,14 @@
         <van-checkbox-group v-model="checkList" ref="checkboxGroup">
             <van-swipe-cell class="shop-products" v-for="item in productInfo" :key="item.id">
                 <van-checkbox :name="item.productid" class="checkbox">
-                    <van-card :num="item.num" :price="item.price" :desc="item.describe" :title="item.name" :thumb="item.imgsrc" class="product">
+                    <van-card
+                        :num="item.num"
+                        :price="item.price + '.00'"
+                        :desc="item.describe"
+                        :title="item.name"
+                        :thumb="item.imgsrc"
+                        class="product"
+                    >
                     </van-card>
                 </van-checkbox>
                 <template #right>
@@ -71,7 +78,7 @@ export default {
     padding-left: 20px;
 }
 .delete-button {
-    height: 114px;
+    height: 100%;
 }
 .shop-products {
     margin-bottom: 10px;

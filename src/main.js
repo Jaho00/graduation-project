@@ -5,6 +5,9 @@ import store from "./store";
 import "reset-css";
 import Vant from "vant";
 import "vant/lib/index.css";
+import { AddressEdit } from "vant";
+
+Vue.use(AddressEdit);
 
 Vue.use(Vant);
 

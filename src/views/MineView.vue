@@ -120,6 +120,7 @@ export default {
             isPass: false,
             // 登录框内:判断是否要发送请求,防止多次点击而后多次发送请求导致后端出问题
             isGet: false,
+            // 我的界面隐藏与显示
         };
     },
     components: {
@@ -166,7 +167,7 @@ export default {
             }
             // console.log(res);
             // console.log(data);
-            console.log(this.userInfo);
+            // console.log(this.userInfo);
 
             // 验证账号是否注册
             if (this.userInfo == undefined || this.userInfo.length == 0) {
@@ -240,7 +241,7 @@ export default {
                 Notify({ type: "warning", message: "请先登录，才能使用该功能！" });
                 return;
             }
-            this.$router.push("/mine/" + type);
+            this.$router.push("/" + type);
         },
         // 注册按钮
         async sigin() {

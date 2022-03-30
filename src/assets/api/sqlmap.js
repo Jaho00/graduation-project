@@ -29,7 +29,7 @@ var sqlMap = {
     favorites: {
         search: "SELECT * FROM productinfo p RIGHT JOIN favorites f on p.id=f.productid WHERE userid = ? ORDER BY time", // 查询用户的收藏夹
         add: "insert into favorites(userid,productid) values (?,?)",
-        delete: "DELETE FROM favorites WHERE userid=?,productid=?",
+        delete: "DELETE FROM favorites WHERE userid=? AND productid=?",
     },
 
     // 商品
