@@ -189,6 +189,20 @@ router.post("/orderform/add", (req, res) => {
     });
 });
 
+// 删除订单
+router.post("/orderform/delete", (req, res) => {
+    var sql = $sql.orderform.delete;
+    var parms = req.body;
+    conn.query(sql, [parms.userid, parms.productid, parms.time], function (err, result) {
+        if (err) {
+            res.json({ msg: "删除订单失败", code: 0 });
+        }
+        if (result) {
+            jsonWrite(res, result);
+        }
+    });
+});
+
 // 查询收藏夹信息
 router.get("/favorites/search", function (req, res) {
     let sql = $sql.favorites.search;

@@ -23,6 +23,7 @@ var sqlMap = {
     orderform: {
         search: "SELECT * FROM productinfo p RIGHT JOIN userproducts u on p.id=u.productid WHERE userid = ? ORDER BY time", // 查询用户的订单
         add: "insert into userproducts(userid,productid,num) values (?,?,?)",
+        delete: "DELETE FROM userproducts WHERE userid=? AND productid=? AND time=?",
     },
 
     // 收藏夹

@@ -2,7 +2,7 @@
     <div id="app">
         <router-view />
         <div class="box"></div>
-        <TopBar></TopBar>
+        <TopBar v-show="isShowTopBar"></TopBar>
     </div>
 </template>
 
@@ -10,10 +10,33 @@
 import TopBar from "@/components/TopBar.vue";
 export default {
     data() {
-        return {};
+        return {
+            isShowTopBar:true
+        };
     },
     components: {
         TopBar,
+    },
+    /* created() {
+        console.log(this.$route.path);
+    }, */
+    watch: {
+        // 判断是否进入到我的页面中的功能模块,进入之后隐藏TopBar
+        '$route.path': {
+            handler(newval,oldval) {
+                let arr=[
+                    "/collect",
+                    "/feedback",
+                    "/order",
+                    "/address",
+                ]
+                if (arr.includes(newval)) {
+                    this.isShowTopBar=false;
+                }else{
+                    this.isShowTopBar=true;
+                }
+            }
+        }
     },
 };
 </script>

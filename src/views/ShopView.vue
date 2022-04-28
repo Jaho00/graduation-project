@@ -21,6 +21,7 @@ export default {
             Url: require("../assets/img/ROMANTIC-STRAWBERRY-150G.jpg"),
         };
     },
+    
     computed: {
         checkAll: {
             get() {

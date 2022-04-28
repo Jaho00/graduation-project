@@ -1,8 +1,8 @@
 <template>
     <div class="home">
-        <form action="/">
+        <!-- <form action="/">
             <van-search v-model="value" shape="round" placeholder="请输入搜索关键词" @search="onSearch" />
-        </form>
+        </form> -->
         <HomeSwiper name="swiper"></HomeSwiper>
 
         <HomeProducts></HomeProducts>
@@ -34,11 +34,15 @@ export default {
 .home {
     width: 100%;
     background-image: linear-gradient(0deg, #c4e2ff, #dbecfd, #eff7ff, #ffffff);
+    padding-top: 6%;
     .box {
         height: 60px;
     }
     .b {
         color: #978b8d;
+    }
+    /deep/.van-grid-item__content--clickable {
+        border-radius: 10px;
     }
 }
 </style>

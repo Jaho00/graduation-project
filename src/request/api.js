@@ -1,10 +1,10 @@
 import instance from "./request";
 import qs from "qs";
 
-// 发起获取用户信息请求
+// 发起获取用户信息请求(使用用户名查询)
 export const getUserInfoAPI = params => instance.get("/Mine/userinfo", { params });
 
-// 发起获取用户信息请求
+// 发起获取用户信息请求(使用id查询)
 export const idGetUserInfoAPI = params => instance.get("/Mine/userinfo/id", { params });
 
 // 上传头像
@@ -30,3 +30,9 @@ export const getFavoritesAPI = params => instance.get("/Mine/favorites/search", 
 
 // 发起取消收藏请求
 export const unSellAPI = params => instance.post("/Mine/favorites/del", qs.stringify(params));
+
+// 修改用户地址
+export const updateAddressAPI = params => instance.post("/Mine/addAddress", qs.stringify(params));
+
+// 删除订单
+export const deleteOrderformAPI = params => instance.post("/Mine/orderform/delete", qs.stringify(params));

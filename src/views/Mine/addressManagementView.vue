@@ -4,124 +4,119 @@
         <van-nav-bar title="地址管理" left-text="返回" left-arrow @click-left="onClickLeft" />
         <!-- 地址管理 -->
         <van-address-list
-            v-model="chosenAddressId"
             :list="list"
-            :disabled-list="disabledList"
-            disabled-text="以下地址超出配送范围"
             default-tag-text="默认"
             @add="onAdd"
             @edit="onEdit"
+            :switchable="false"
+            v-show="isListShow"
+            :key="updateAddressKey"
         />
 
-        <!-- <van-address-edit
-            :area-list="areaList"
-            show-area
-            show-detail
-            :area-columns-placeholder="['请选择', '请选择', '请选择']"
-            @save="onSave"
-            @change-detail="onChangeDetail"
-        /> -->
+        <van-address-edit :show-area="false" show-detail @save="onSave" v-show="!isListShow" :address-info="addressInfo">
+            <div class="van-address-edit__buttons cancel">
+                <button @click="cancel" class="van-button van-button--default van-button--normal van-button--block van-button--round cancel">
+                    <div class="van-button__content"><span class="van-button__text">返回</span></div>
+                </button>
+            </div>
+        </van-address-edit>
     </div>
 </template>
 
 <script>
 // 轻提示
 import { Toast } from "vant";
+// 引入省市区数据
+import { areaList } from "@vant/area-data";
+import { updateAddressAPI, idGetUserInfoAPI } from "@/request/api";
 export default {
     data() {
         return {
-            chosenAddressId: "1",
             list: [
                 {
-                    id: "1",
-                    name: "张三",
-                    tel: "13000000000",
-                    address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室",
+                    id: "",
+                    name: "",
+                    tel: "",
+                    address: "",
                     isDefault: true,
                 },
-                {
-                    id: "2",
-                    name: "李四",
-                    tel: "1310000000",
-                    address: "浙江省杭州市拱墅区莫干山路 50 号",
-                },
-                {
-                    id: "2",
-                    name: "李四",
-                    tel: "1310000000",
-                    address: "浙江省杭州市拱墅区莫干山路 50 号",
-                },
-                {
-                    id: "2",
-                    name: "李四",
-                    tel: "1310000000",
-                    address: "浙江省杭州市拱墅区莫干山路 50 号",
-                },
-                {
-                    id: "2",
-                    name: "李四",
-                    tel: "1310000000",
-                    address: "浙江省杭州市拱墅区莫干山路 50 号",
-                },
-                {
-                    id: "2",
-                    name: "李四",
-                    tel: "1310000000",
-                    address: "浙江省杭州市拱墅区莫干山路 50 号",
-                },
-                {
-                    id: "2",
-                    name: "李四",
-                    tel: "1310000000",
-                    address: "浙江省杭州市拱墅区莫干山路 50 号",
-                },
-                {
-                    id: "2",
-                    name: "李四",
-                    tel: "1310000000",
-                    address: "浙江省杭州市拱墅区莫干山路 50 号",
-                },
             ],
-            disabledList: [
-                {
-                    id: "3",
-                    name: "王五",
-                    tel: "1320000000",
-                    address: "浙江省杭州市滨江区江南大道 15 号",
-                },
-            ],
-            areaList: {
-                110000: "北京市",
-                120000: "天津市",
+            isListShow: true,
+            addressInfo: {
+                id: "",
+                name: "",
+                tel: "",
+                address: "",
             },
-            searchResult: [],
+            updateAddressKey: 1,
         };
+    },
+    created() {
+        this.getUserInfo();
     },
     methods: {
         onAdd() {
             Toast("新增地址");
         },
+        // 编辑地址按钮
         onEdit(item, index) {
-            Toast("编辑地址:" + index);
+            this.isListShow = !this.isListShow;
         },
         // 返回按钮跳转
         onClickLeft() {
             this.$router.push("/mine");
+            this.isListShow = true;
         },
-        onSave() {
-            Toast("save");
-        },
-        onChangeDetail(val) {
-            if (val) {
-                this.searchResult = [
-                    {
-                        name: "黄龙万科中心",
-                        address: "杭州市西湖区",
-                    },
-                ];
-            } else {
-                this.searchResult = [];
+        async onSave(e) {
+            console.log(e);
+            let id = localStorage.getItem("id");
+            let ari = this.addressInfo;
+            if (e.name == ari.name && e.addressDetail == ari.addressDetail && e.tel == ari.tel) {
+                Toast.fail("您的地址信息未修改！");
+
+                return;
             }
+
+            let res = await updateAddressAPI({
+                id,
+                addressee: e.name,
+                address: e.addressDetail,
+                addresseePhone: e.tel,
+            });
+
+            if (res.code == 200) {
+                await this.getUserInfo();
+                this.updateAddressKey++;
+                this.isListShow = !this.isListShow;
+                console.log(this.updateAddressKey);
+            } else {
+                Toast.fail(res.msg);
+            }
+        },
+        async getUserInfo() {
+            let id = localStorage.getItem("id");
+            let res = await idGetUserInfoAPI({
+                id,
+            });
+
+            let userinfo = res.data[0];
+            let { addressee, addresseePhone, address } = userinfo;
+            // console.log(userinfo);
+            let List = this.list[0];
+            List.id = id;
+            List.name = addressee;
+            List.address = address;
+            List.tel = addresseePhone;
+            this.addressInfo = {
+                id,
+                name: addressee,
+                tel: addresseePhone,
+                addressDetail: address,
+            };
+        },
+        // 返回按钮
+        cancel() {
+            this.isListShow = !this.isListShow;
         },
     },
 };
@@ -133,5 +128,14 @@ export default {
     position: relative;
     background-color: #fff;
     z-index: 999;
+    /deep/.van-address-list__bottom {
+        display: none;
+    }
+    /deep/.van-address-edit__buttons {
+        padding: 10px 4px;
+    }
+    .cancel {
+        padding-bottom: 0;
+    }
 }
 </style>

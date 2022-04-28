@@ -3,7 +3,10 @@
         <router-view></router-view>
         <div class="unlogin-box" v-show="!isShowlogin">
             <div class="head-portrait" @click="shadeOpenClick">
-                <img src="https://s2.loli.net/2022/03/23/L7AefwBqNhGSj3T.png" alt="" />
+                <img
+                    src="https://s2.loli.net/2022/03/23/L7AefwBqNhGSj3T.png"
+                    alt=""
+                />
             </div>
             <div class="userinfo" @click="shadeOpenClick">
                 <div class="username">未登录</div>
@@ -12,7 +15,11 @@
         </div>
         <div class="login-box" v-show="isShowlogin">
             <div class="head-portrait">
-                <van-uploader :after-read="afterRead" />
+                <!-- <van-uploader :after-read="afterRead" /> -->
+                <img
+                    src="https://s2.loli.net/2022/03/18/W9TdYPSBqgyfOi8.jpg"
+                    alt=""
+                />
             </div>
             <div class="userinfo">
                 <div class="l_username">{{ userInfo.username }}</div>
@@ -29,18 +36,51 @@
         </div>
         <!-- 四宫格 -->
         <van-grid :gutter="50" column-num="2" class="grid">
-            <van-grid-item icon="orders-o" text="我的订单" class="grid" @click="fm('order')" />
-            <van-grid-item icon="location-o" text="地址管理" class="grid" @click="fm('address')" />
-            <van-grid-item icon="star-o" text="我的收藏" class="grid" @click="fm('collect')" />
-            <van-grid-item icon="records" text="意见反馈" class="grid" @click="fm('feedback')" />
+            <van-grid-item
+                icon="orders-o"
+                text="我的订单"
+                class="grid"
+                @click="fm('order')"
+            />
+            <van-grid-item
+                icon="location-o"
+                text="地址管理"
+                class="grid"
+                @click="fm('address')"
+            />
+            <van-grid-item
+                icon="star-o"
+                text="我的收藏"
+                class="grid"
+                @click="fm('collect')"
+            />
+            <van-grid-item
+                icon="records"
+                text="意见反馈"
+                class="grid"
+                @click="fm('feedback')"
+            />
         </van-grid>
         <!-- 遮罩 -->
         <van-overlay :show="show" @click="(show = false), (isShowModal = true)">
             <!-- 登录模态框 -->
             <div class="login-modal" @click.stop v-show="isShowModal">
                 <div class="back" @click="show = false">×</div>
-                <input type="text" name="" id="username" placeholder="请输入用户名" v-model="username" />
-                <input type="password" name="" id="psd" placeholder="请输入密码" v-model="password" ref="l_psd_inp" />
+                <input
+                    type="text"
+                    name=""
+                    id="username"
+                    placeholder="请输入用户名"
+                    v-model="username"
+                />
+                <input
+                    type="password"
+                    name=""
+                    id="psd"
+                    placeholder="请输入密码"
+                    v-model="password"
+                    ref="l_psd_inp"
+                />
 
                 <drag-verify
                     ref="dragVerify7"
@@ -61,10 +101,30 @@
             </div>
             <!-- 注册模态框 -->
             <div class="sigin-modal" @click.stop v-show="!isShowModal">
-                <div class="back" @click="(show = false), (isShowModal = true)">×</div>
-                <input type="text" name="" id="s_username" placeholder="请输入用户名" v-model="s_username" />
-                <input type="password" name="" id="s_psd" placeholder="请输入密码" v-model="s_password" />
-                <input type="text" name="" id="s_phone" placeholder="请输入手机号" v-model="s_userphone" />
+                <div class="back" @click="(show = false), (isShowModal = true)">
+                    ×
+                </div>
+                <input
+                    type="text"
+                    name=""
+                    id="s_username"
+                    placeholder="请输入用户名"
+                    v-model="s_username"
+                />
+                <input
+                    type="password"
+                    name=""
+                    id="s_psd"
+                    placeholder="请输入密码"
+                    v-model="s_password"
+                />
+                <input
+                    type="text"
+                    name=""
+                    id="s_phone"
+                    placeholder="请输入手机号"
+                    v-model="s_userphone"
+                />
                 <drag-verify
                     ref="dragVerify7"
                     :height="34"
@@ -90,12 +150,23 @@
 // 通知
 import { Notify } from "vant";
 import axios from "axios";
+// 弹出框
+import { Dialog } from "vant";
 // 滑块验证码
 import dragVerify from "vue-drag-verify2";
 // 验证工具
-import { validateUserName, validatePassword, validatePhoneNumber } from "@/utils";
+import {
+    validateUserName,
+    validatePassword,
+    validatePhoneNumber,
+} from "@/utils";
 // 请求API
-import { getUserInfoAPI, uploadHeadImgAPI, idGetUserInfoAPI, userRegistrationAPI } from "@/request/api";
+import {
+    getUserInfoAPI,
+    uploadHeadImgAPI,
+    idGetUserInfoAPI,
+    userRegistrationAPI,
+} from "@/request/api";
 export default {
     data() {
         return {
@@ -171,7 +242,10 @@ export default {
 
             // 验证账号是否注册
             if (this.userInfo == undefined || this.userInfo.length == 0) {
-                Notify({ type: "warning", message: "您输入的账号未注册,请先注册账号!" });
+                Notify({
+                    type: "warning",
+                    message: "您输入的账号未注册,请先注册账号!",
+                });
                 // this.isShowModal = false;
                 this.show = true;
                 this.isGet = false;
@@ -181,7 +255,10 @@ export default {
             }
             // 验证账号是否有误
             if (this.username != this.userInfo.username) {
-                Notify({ type: "warning", message: "您输入的账号有误或未注册!" });
+                Notify({
+                    type: "warning",
+                    message: "您输入的账号有误或未注册!",
+                });
                 this.show = true;
                 this.isGet = false;
                 return;
@@ -224,21 +301,33 @@ export default {
         },
         // 退出登录
         relogin() {
-            localStorage.removeItem("token");
-            localStorage.removeItem("id");
-            // 切换回未登录的状态
-            this.isShowlogin = false;
-            // 恢复验证码为未认证的状态
-            this.isPassing7 = false;
-            this.isPass = false;
-            // 更改key值实现页面重载以重置验证码未认证的状态
-            this.refresh++;
+            Dialog.confirm({
+                title: "确认要退出登录吗",
+            })
+                .then(() => {
+                    // on confirm
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("id");
+                    // 切换回未登录的状态
+                    this.isShowlogin = false;
+                    // 恢复验证码为未认证的状态
+                    this.isPassing7 = false;
+                    this.isPass = false;
+                    // 更改key值实现页面重载以重置验证码未认证的状态
+                    this.refresh++;
+                })
+                .catch(() => {
+                    // on cancel
+                });
         },
         // 功能模块验证是否登录,未登录无法使用,登录后即可跳转至功能模块内
         fm(type) {
             let token = localStorage.getItem("token");
             if (!token) {
-                Notify({ type: "warning", message: "请先登录，才能使用该功能！" });
+                Notify({
+                    type: "warning",
+                    message: "请先登录，才能使用该功能！",
+                });
                 return;
             }
             this.$router.push("/" + type);
@@ -253,7 +342,11 @@ export default {
 
             // 验证用户名是否按要求填写
             if (!validateUserName(this.s_username)) {
-                Notify({ type: "warning", message: "账号必须字母开头，长度在 5-16 之间，可以使用字母数字下划线!" });
+                Notify({
+                    type: "warning",
+                    message:
+                        "账号必须字母开头，长度在 5-16 之间，可以使用字母数字下划线!",
+                });
                 return;
             }
 
@@ -265,7 +358,11 @@ export default {
 
             // 验证密码是否按要求填写
             if (!validatePassword(this.s_password)) {
-                Notify({ type: "warning", message: "密码必须包含大小写字母和数字的组合，可以使用特殊字符，长度在5-15之间!" });
+                Notify({
+                    type: "warning",
+                    message:
+                        "密码必须包含大小写字母和数字的组合，可以使用特殊字符，长度必须在5-15之间哟!",
+                });
                 return;
             }
 
@@ -309,7 +406,12 @@ export default {
                 this.isShowlogin = true;
                 // 关闭注册界面
                 this.show = false;
-                Notify({ type: "success", message: "注册成功,已为您自动登录!" });
+                // 注册模态框变回登录模态框
+                this.isShowModal = true;
+                Notify({
+                    type: "success",
+                    message: "注册成功,已为您自动登录!",
+                });
             } else {
                 Notify({ type: "warning", message: "注册失败!" });
             }
@@ -346,47 +448,59 @@ export default {
 
     .unlogin-box,
     .login-box {
-        height: 160px;
+        height: 20%;
         // width: 200%;
-        background-image: linear-gradient(0deg, #c4e2ff, #dbecfd, #eff7ff, #ffffff);
+        background-image: linear-gradient(
+            0deg,
+            #c4e2ff,
+            #dbecfd,
+            #eff7ff,
+            #ffffff
+        );
         display: flex;
         align-items: center;
         border-radius: 0 0 50% 50%;
         padding-bottom: 20px;
         box-sizing: border-box;
         .head-portrait {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
+            width: 20%;
             margin-left: 50px;
-
             img {
                 width: 100%;
+                border-radius: 50%;
+                overflow: hidden;
             }
         }
         .userinfo {
             display: flex;
             align-items: center;
+            width: 80%;
+            padding-right: 5%;
             .username {
                 color: rgb(77, 89, 92);
                 font-weight: 600;
                 margin-left: 30px;
-                margin-right: 130px;
+                margin-right: 100px;
+                width: 100%;
+                flex: 1;
             }
             .gt {
                 font-family: "黑体";
                 font-weight: 520;
                 font-size: 18px;
+                flex: 1;
             }
             .l_username {
                 color: rgb(77, 89, 92);
                 font-weight: 600;
                 margin-left: 6vw;
                 margin-right: 20vw;
+                flex: 1;
             }
             .relogin {
                 font-size: 12px;
+
+                flex: 1;
             }
         }
     }

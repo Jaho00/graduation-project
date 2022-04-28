@@ -1,8 +1,14 @@
 <template>
     <div class="homeSwiper">
         <div class="box">
-            <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-                <van-swipe-item v-for="(item, index) in img_src" :key="index"><img :src="item" alt="" /></van-swipe-item>
+            <van-swipe
+                class="my-swipe"
+                :autoplay="3000"
+                indicator-color="white"
+            >
+                <van-swipe-item v-for="(item, index) in img_src" :key="index"
+                    ><img :src="item" alt=""
+                /></van-swipe-item>
             </van-swipe>
         </div>
     </div>
@@ -15,7 +21,6 @@ export default {
             img_src: [
                 "https://s2.loli.net/2022/03/16/Sa2ulxeDiWYMwmy.jpg",
                 "https://s2.loli.net/2022/03/16/6FbyxlpYP5B7IkQ.jpg",
-                "https://s2.loli.net/2022/03/16/y2nDqKaVMfz7XAG.jpg",
                 "https://s2.loli.net/2022/03/16/7eGWqMShHzgE6Pu.jpg",
                 "https://s2.loli.net/2022/03/16/mx1Z4qD5V6wSjCo.jpg",
                 "https://s2.loli.net/2022/03/16/ax3f1lImQ8ZRibz.jpg",

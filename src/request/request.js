@@ -11,7 +11,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
     config => {
         // 在请求之前做的操作
-        console.log(config);
+        // console.log(config);
         return config;
     },
     err => {
