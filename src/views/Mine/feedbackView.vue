@@ -55,7 +55,8 @@ export default {
 <style lang="less" scoped>
 .feedback {
     width: 100%;
-    position: fixed;
+    position: absolute;
+    height: 100vh;
     left: 0;
     top: 0;
     background-color: #fff;

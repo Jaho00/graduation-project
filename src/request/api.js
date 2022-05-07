@@ -36,3 +36,24 @@ export const updateAddressAPI = params => instance.post("/Mine/addAddress", qs.s
 
 // 删除订单
 export const deleteOrderformAPI = params => instance.post("/Mine/orderform/delete", qs.stringify(params));
+
+// 删除购物车中的商品
+export const deleteShoppingCarProductAPI = params => instance.post("/ShoppingCart/del", qs.stringify(params));
+
+// 提交订单
+export const submitOrderAPI = params => instance.post("/Mine/orderform/add", qs.stringify(params));
+
+// 根据商品id获取商品信息
+export const idGetProductInfoAPI = params => instance.get("/Product/search/id", { params });
+
+// 购物车添加商品
+export const addShoppingAPI = params => instance.post("/ShoppingCart/add", qs.stringify(params));
+
+// 添加收藏
+export const addFavoritesAPI = params => instance.post("/Mine/favorites/add", qs.stringify(params));
+
+// 删除收藏
+export const deleteFavoritesAPI = params => instance.post("/Mine/favorites/del", qs.stringify(params));
+
+// 根据id获取收藏商品
+export const idGetFavoritesAPI = params => instance.get("/Mine/favorites/search/id", { params });

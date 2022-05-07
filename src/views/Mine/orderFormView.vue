@@ -1,7 +1,7 @@
 <template>
     <div class="order">
         <!-- 导航栏 -->
-        <van-nav-bar title="我的订单" left-text="返回" left-arrow @click-left="onClickLeft" />
+        <van-nav-bar title="我的订单" left-text="返回" left-arrow @click-left="onClickLeft" class="daohang" />
         <van-swipe-cell v-for="item in orderForm" :key="item.time">
             <van-card :num="item.num" :price="item.price + '.00'" :desc="item.describe" :title="item.name" :thumb="item.imgsrc" />
             <template #right>
@@ -88,9 +88,8 @@ export default {
 <style lang="less" scoped>
 .order {
     width: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
+    position: absolute;
+    height: 100vh;
     background-color: #fff;
     z-index: 999;
     .van-card__price {

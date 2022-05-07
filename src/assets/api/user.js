@@ -217,6 +217,20 @@ router.get("/favorites/search", function (req, res) {
     });
 });
 
+// 根据商品id查询收藏夹信息
+router.get("/favorites/search/id", function (req, res) {
+    let sql = $sql.favorites.search_id;
+    let params = req.query;
+    conn.query(sql, [params.userid, params.productid], function (err, result) {
+        if (err) {
+            res.json({ msg: "查询失败", code: 0 });
+        }
+        if (result) {
+            res.json({ msg: "查询成功", code: 200, data: result });
+        }
+    });
+});
+
 // 收藏夹添加
 router.post("/favorites/add", (req, res) => {
     var sql = $sql.favorites.add;

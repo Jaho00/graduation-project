@@ -50,6 +50,11 @@ const routes = [
         name: "address",
         component: () => import(/* webpackChunkName: "address" */ "../views/Mine/addressManagementView.vue"),
     },
+    {
+        path: "/productdetail",
+        name: "productdetail",
+        component: () => import(/* webpackChunkName: "productdetail" */ "../views/ProductDetail.vue"),
+    },
 ];
 
 const router = new VueRouter({

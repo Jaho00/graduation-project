@@ -29,6 +29,7 @@ var sqlMap = {
     // 收藏夹
     favorites: {
         search: "SELECT * FROM productinfo p RIGHT JOIN favorites f on p.id=f.productid WHERE userid = ? ORDER BY time", // 查询用户的收藏夹
+        search_id: "SELECT * FROM productinfo p RIGHT JOIN favorites f on p.id=f.productid WHERE userid = ? AND productid = ? ORDER BY time", // 查询用户的收藏夹
         add: "insert into favorites(userid,productid) values (?,?)",
         delete: "DELETE FROM favorites WHERE userid=? AND productid=?",
     },
@@ -36,6 +37,7 @@ var sqlMap = {
     // 商品
     products: {
         search: "select * from productinfo",
+        search_id: "select * from productinfo where id=?",
         add: "insert into productinfo(name,price,describe,imgsrc) values (?,?,?,?)",
         delete: "DELETE FROM productinfo WHERE id=?",
     },
@@ -46,7 +48,7 @@ var sqlMap = {
         p_search: "SELECT * FROM productinfo p RIGHT JOIN `shopping-cart` s on p.id=s.productid WHERE userid = ? and productid = ?", // 查询购物车信息
         add: "insert into `shopping-cart`(userid,productid,num) values (?,?,?)", //购物车添加商品
         upshopcart: "UPDATE `shopping-cart` SET num = ? WHERE productid = ? and userid = ?", //修改userinfo中的地址
-        delete: "DELETE FROM `shopping-cart` WHERE userid=?,productid=?", //删除购物车中的商品
+        delete: "DELETE FROM `shopping-cart` WHERE userid=? and productid=?", //删除购物车中的商品
     },
 };
 module.exports = sqlMap;

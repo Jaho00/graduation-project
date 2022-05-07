@@ -6,6 +6,11 @@ import "reset-css";
 import Vant from "vant";
 import "vant/lib/index.css";
 import { AddressEdit } from "vant";
+import { GoodsAction, GoodsActionIcon, GoodsActionButton } from "vant";
+
+Vue.use(GoodsAction);
+Vue.use(GoodsActionButton);
+Vue.use(GoodsActionIcon);
 
 Vue.use(AddressEdit);
 

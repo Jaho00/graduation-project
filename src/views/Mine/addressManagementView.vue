@@ -125,7 +125,8 @@ export default {
 <style lang="less" scoped>
 .address {
     width: 100%;
-    position: relative;
+    position: absolute;
+    height: 100vh;
     background-color: #fff;
     z-index: 999;
     /deep/.van-address-list__bottom {

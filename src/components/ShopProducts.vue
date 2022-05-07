@@ -52,35 +52,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.van-card__num {
-    border: 1px solid #978b8d;
-    border-radius: 10px;
-    padding: 1px 8px;
-    margin-right: 10px;
-}
-.van-card__price {
-    color: #fb5103;
-    font-weight: bold;
-}
-.product {
-    background-color: #fff;
-}
-.van-card__title {
-    width: 215px;
-    display: block;
-    overflow: hidden; //超出一行文字自动隐藏
-    text-overflow: ellipsis; //文字隐藏后添加省略号
-    white-space: nowrap; //强制不换行
-}
-.checkbox {
-    background-color: #fff;
-    padding-left: 20px;
-}
-.delete-button {
-    height: 100%;
-}
-.shop-products {
-    margin-bottom: 10px;
-}
-</style>
+<style lang="less" scoped></style>

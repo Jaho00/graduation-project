@@ -2,7 +2,7 @@
     <div>
         <van-divider :style="{ color: '#978b8d', borderColor: '#978b8d', padding: '0 16px' }">全部商品</van-divider>
         <van-grid :border="true" :column-num="2" :gutter="15" :clickable="true">
-            <van-grid-item v-for="item in productInfo" :key="item.id">
+            <van-grid-item v-for="item in productInfo" :key="item.id" :to="{ path: '/productdetail', query: { productid: item.id } }">
                 <van-image :src="item.imgsrc" radius="10px" />
                 <div class="title">{{ item.name }}</div>
                 <div class="price">{{ item.price | priceForm }}</div>
@@ -23,7 +23,7 @@ export default {
         setTimeout(async () => {
             let res = await getProductInfoAPI();
             if (res.code == 200) {
-                console.log(res.data);
+                // console.log(res.data);
                 this.productInfo = res.data;
             }
         });
